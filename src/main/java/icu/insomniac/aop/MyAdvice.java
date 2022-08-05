@@ -13,13 +13,13 @@ public class MyAdvice {
     private void fp(){}
 
     @Around("fp()")
-    public Object around(ProceedingJoinPoint pjp) throws Throwable {
-        Object proceed = null;
-        for (int i = 0; i < 10; i++){
+    public void around(ProceedingJoinPoint pjp) throws Throwable {
+        long start = System.currentTimeMillis();
+        for (int i = 0; i < 100; i++){
             System.out.print((i+1)+": ");
-            proceed = pjp.proceed();
+            pjp.proceed();
         }
-
-        return proceed;
+        Long end = System.currentTimeMillis();
+        System.out.println("Time to execute 100 times: "+(end-start)+" ms");
     }
 }
