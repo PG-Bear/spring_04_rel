@@ -1,6 +1,7 @@
 package icu.insomniac.aop;
 
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
@@ -20,6 +21,8 @@ public class MyAdvice {
             pjp.proceed();
         }
         Long end = System.currentTimeMillis();
+        Signature signature = pjp.getSignature();
+        System.out.println(signature.getDeclaringTypeName()+"\n"+signature.getName());
         System.out.println("Time to execute 100 times: "+(end-start)+" ms");
     }
 }
